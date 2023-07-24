@@ -1,8 +1,22 @@
 #INCLUDE 'PROTHEUS.CH'
 #INCLUDE "FWBROWSE.CH"
 
-User Function EXPLO002()
-	Local oLista
+User Function EXP0033()
+	Local cModulo 	:= 'SIGAFAT'
+	MsApp():New(cModulo)
+	oApp:cInternet := NIL
+	oApp:CreateEnv()
+	PtSetTheme("OCEAN")
+	oApp:cStartProg    	:= 'U_EXP0033A'
+	oApp:lMessageBar	:= .T.
+	oApp:cModDesc		:= cModulo
+	__lInternet 		:= .T.
+	lMsFinalAuto 		:= .F.
+	oApp:lMessageBar	:= .T.
+	oApp:Activate()
+Return
+
+User Function EXP0033A()
 	Local oPanel
 	Local oUrl
 	Local cUrl := Space(254)
@@ -13,17 +27,17 @@ User Function EXPLO002()
 
 	DEFINE MSDIALOG oDlg Title "Lista de Produtos" FROM 0,0 TO 300,600 PIXEL
 		oPanel:= tPanel():New(00,00,,oDlg,,,,,,100,26)
-		oUrl:= TGet():New( 003, 005,{|u| if(PCount()&gt;0,cUrl:=u,cUrl)},oPanel,255, 010,Nil,{||  },0,,,.F.,,.T.,,.F.,,.F.,.F.,,.F.,.F.,"",cUrl,,,,,,,"Digite o endereço com o arquivo: ",1 )
+		oUrl:= TGet():New( 003, 005,{|u| if(PCount()>0,cUrl:=u,cUrl)},oPanel,255, 010,Nil,{||  },0,,,.F.,,.T.,,.F.,,.F.,.F.,,.F.,.F.,"",cUrl,,,,,,,"Digite o endereço com o arquivo: ",1 )
 		oBtnBuscar:= tButton():New(011,265,'Baixar' ,oPanel, {|| Baixar(cUrl)  },35,12,,,,.T.)  
 		oPanel:Align := CONTROL_ALIGN_TOP
 		
 		//Cria o grid que receberá o conteudo do arquivo
 		DEFINE FWBROWSE oBrowse1 DATA ARRAY ARRAY aItens NO CONFIG  NO REPORT NO LOCATE OF oDlg
 		
-		ADD COLUMN oColumn DATA { || aItens[oBrowse1:At(),1] } TITLE "Codigo" 	 SIZE 010 HEADERCLICK { || .T. } DOUBLECLICK { || MsgInfo(aItens[oBrowse1:At(),1]) } OF oBrowse1
-		ADD COLUMN oColumn DATA { || aItens[oBrowse1:At(),2] } TITLE "Descricao" HEADERCLICK { || .T. } OF oBrowse1
-		ADD COLUMN oColumn DATA { || aItens[oBrowse1:At(),3] } TITLE "Valor" 	 SIZE 010 TYPE "N" HEADERCLICK { || .T. } OF oBrowse1
-		ADD COLUMN oColumn DATA { || aItens[oBrowse1:At(),4] } TITLE "Status" 	 SIZE 005 HEADERCLICK { || .T. } OF oBrowse1
+		ADD COLUMN oColumn DATA { || aItens[oBrowse1:At(),1] } TITLE "Codigo" 	 SIZE 010 HEADERCLICK { || .T. } DOUBLECLICK { ||  } OF oBrowse1
+		ADD COLUMN oColumn DATA { || aItens[oBrowse1:At(),2] } TITLE "Descricao" HEADERCLICK { || .T. } OF oBrowse1
+		ADD COLUMN oColumn DATA { || aItens[oBrowse1:At(),3] } TITLE "Valor" 	 SIZE 010 TYPE "N" HEADERCLICK { || .T. } OF oBrowse1
+		ADD COLUMN oColumn DATA { || aItens[oBrowse1:At(),4] } TITLE "Status" 	 SIZE 005 HEADERCLICK { || .T. } OF oBrowse1
 		
 		oBrowse1:ACOLUMNS[1]:NALIGN := 0 //Alinhamento centralizado
 		oBrowse1:ACOLUMNS[3]:NALIGN := 2 //Alinhamento direita
@@ -43,8 +57,6 @@ Static Function Baixar(cUrl)
 	Local cTexto	:= ""
 	Local cHtml		:= ""
 	Local nHtml		:= 0
-	Local nCont 	:= 0
-	Local aLinha  	:= {}
 	Local nArquivo	:= 0
 	Local cArquivo 	:= "\system\arquivoremoto.csv"
 	Local nHdl
