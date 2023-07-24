@@ -4,4 +4,6 @@ Sempre nos perguntam como trabalhar com arquivos remotos, tipo como importar um 
 
 HttpGet - Permite emular um client HTTP – Hypertext Transfer Protocol, através de uma função da linguagem AdvPL, acessando um determinado documento HTML, publicado em um servidor Web, utilizando o método GET, permitindo a passagem de parâmetros via URL e aguardando por um tempo determinado (time-out) pela resposta do servidor solicitado.
 
+<img src="/resources/arquivoremoto.png">
+
 Para saber mais acesse http://tdn.totvs.com/display/tec/HTTPGet
