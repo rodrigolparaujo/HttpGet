@@ -1,7 +1,7 @@
 #INCLUDE 'PROTHEUS.CH'
 #INCLUDE "FWBROWSE.CH"
 
-User Function EXP0033()
+User Function EXPLO002()
 	Local oPanel
 	Local oUrl
 	Local cUrl := Space(254)
