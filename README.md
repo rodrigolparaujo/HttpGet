@@ -7,3 +7,5 @@ HttpGet - Permite emular um client HTTP – Hypertext Transfer Protocol, atravé
 <img src="/resources/arquivoremoto.png">
 
 Para saber mais acesse http://tdn.totvs.com/display/tec/HTTPGet
+
+<center><p><a href="https://dayz-servers.org/server/170059/"><img src="https://dayz-servers.org/server/170059/banners/leaderboard-1.png" border="0" class="img-fluid"></a></p></center>
